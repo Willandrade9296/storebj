@@ -37,8 +37,13 @@ export default (state, accion) => {
         accion.payload.type === "+"
           ? accion.payload.value
           : -accion.payload.value;
+      const qtyNew = 
+      accion.payload.type === "+"
+      ? accion.payload.cantidad + 1
+      : accion.payload.cantidad - 1
       return {
         ...state,
+        car: state.car.map(e => e.id_productos === accion.payload.id ? {...e, qty: qtyNew} : e),
         total: state.total + parseFloat(op),
       };
     case LOGOUT_USER:

@@ -3,16 +3,16 @@ import { Delete } from "@material-ui/icons";
 import { useContext, useState } from "react";
 import ProductContext from "../../../context/ProductContext.js/ProductContext";
 
-const CardCart = ({ data, cantidad }) => {
+const CardCart = ({ data }) => {
   const { DeleteProduct,GetQty } = useContext(ProductContext);
-  const [qty, setQty] = useState(1);
+  const [qty, setQty] = useState(data.qty);
   const changeQty = (value, type) => {
     if (type === '+') {
       setQty(qty+1)
-      GetQty(value, '+')
+      GetQty(value, '+', data.id_productos, qty)
     }else{
       setQty(qty-1)
-      GetQty(value, '-')
+      GetQty(value, '-', data.id_productos, qty)
     }
   }
   return (

@@ -13,6 +13,7 @@ import {
   LOGOUT_USER
 } from "../index";
 import Notifications from "../../notifications/notifications";
+import  {v4 as uuidV4} from 'uuid';
 const ProductState = (props) => {
   const initialState = {
     products: [],
@@ -31,6 +32,8 @@ const ProductState = (props) => {
   };
 
   const AddProduct = (value) => {
+    value.qty = 1;
+    value.id_productos = uuidV4();
     Notifications("Producto agregado", "success");
     dispatch({
       type: SELECT_PRODUCT,
@@ -44,10 +47,10 @@ const ProductState = (props) => {
     });
   };
 
-  const GetQty = (value, type) => {
+  const GetQty = (value, type, id, cantidad) => {
     dispatch({
       type: SELECT_QTY,
-      payload: { value, type },
+      payload: { value, type, id, cantidad: cantidad },
     });
   };
 
